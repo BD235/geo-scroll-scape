@@ -1,57 +1,144 @@
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
 const HomeView = () => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const isAnimating = useRef(false);
+  const DURATION = 800; // Animation duration in ms
+
+  const handleToggle = () => {
+    if (isAnimating.current) return;
+
+    isAnimating.current = true;
+    setIsFlipped(prev => !prev);
+
+    // Lock toggling until animation completes
+    setTimeout(() => {
+      isAnimating.current = false;
+    }, DURATION);
+  };
+
   return (
-    <div className="h-full flex flex-col md:flex-row items-center justify-center px-6 md:px-16 lg:px-24 gap-10 md:gap-16">
-      {/* Left: Text */}
+    <div className="relative h-full w-full flex flex-col items-center justify-start pt-0 px-6 bg-background overflow-hidden perspective-1000">
+      {/* Name SVG - Background layer (Static) */}
+      <div className="w-full max-w-[98vw] sm:max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] relative z-0 mt-8 md:mt-4 lg:mt-2 transition-all duration-300 pointer-events-none">
+        <img
+          src="/teks_bd.svg"
+          alt="Bernardinus Dicky"
+          className="w-full h-auto select-none pointer-events-none drop-shadow-2xl"
+        />
+      </div>
+
+      {/* Flip Container - Photos anchored to bottom of viewport, improved circle animation */}
+      <div className="absolute inset-0 pointer-events-none z-10 flex items-start justify-center pt-[22vh]">
+        <motion.div
+          className="relative w-full h-[78vh] max-w-[95vw] sm:max-w-[80vw] md:max-w-[70vw] lg:max-w-[60vw] pointer-events-none cursor-pointer group"
+          animate={{ rotateY: isFlipped ? 180 : 0 }}
+          transition={{
+            duration: DURATION / 1000,
+            ease: [0.4, 0, 0.2, 1]
+          }}
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          {/* FRONT SIDE */}
+          <div className="absolute inset-0 w-full h-full backface-hidden flex flex-col items-center justify-end">
+            {/* Gradient Orange Circle */}
+            <motion.div
+              onMouseEnter={handleToggle}
+              animate={{
+                scale: isFlipped ? 0.85 : 1,
+              }}
+              transition={{
+                scale: { type: "spring", stiffness: 300, damping: 15 },
+              }}
+              className="absolute top-[4%] w-[55vw] sm:w-[45vw] md:w-[35vw] lg:w-[28vw] aspect-square rounded-full bg-gradient-to-t from-[#fe4302] to-[#fd9900] z-10 opacity-100 pointer-events-auto"
+            />
+
+            {/* User Photo */}
+            <div
+              onMouseEnter={handleToggle}
+              className="relative h-[48vh] md:h-[53vh] lg:h-[65vh] z-20 pointer-events-auto"
+            >
+              <img
+                src="/dicky_motion.png"
+                alt="Bernardinus Dicky Front"
+                className="h-full w-auto object-contain object-bottom select-none pointer-events-none drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)]"
+              />
+            </div>
+          </div>
+
+          {/* BACK SIDE */}
+          <div
+            className="absolute inset-0 w-full h-full backface-hidden flex flex-col items-center justify-end"
+            style={{ transform: "rotateY(180deg)" }}
+          >
+            {/* Custom Image Circle - Back layer */}
+            <motion.div
+              onMouseEnter={handleToggle}
+              animate={{
+                scale: isFlipped ? 1 : 0.85,
+              }}
+              transition={{
+                scale: { type: "spring", stiffness: 300, damping: 15 },
+              }}
+              className="absolute top-[4%] w-[55vw] sm:w-[45vw] md:w-[35vw] lg:w-[28vw] aspect-square rounded-full z-10 opacity-100 pointer-events-auto overflow-hidden"
+            >
+              <img
+                src="/lingkaran01.png"
+                alt="Circle Back"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+
+            {/* User Photo - Back face layer */}
+            <div
+              onMouseEnter={handleToggle}
+              className="relative h-[48vh] md:h-[53vh] lg:h-[65vh] z-20 pointer-events-auto"
+            >
+              <img
+                src="/dicky_motion3.png"
+                alt="Bernardinus Dicky Back"
+                className="h-full w-auto object-contain object-bottom select-none pointer-events-none drop-shadow-[0_20px_30px_rgba(0,0,0,0.3)]"
+              />
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* ADDITIONAL INFORMATION BLOCKS */}
+      {/* Left Info - Greeting & Bio */}
       <motion.div
-        className="flex-1 flex flex-col justify-center max-w-xl"
-        initial={{ opacity: 0, x: -20 }}
+        initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.1, duration: 0.4 }}
+        transition={{ delay: 0.5, duration: 0.8 }}
+        className="absolute left-[10vw] md:left-[13.4vw] bottom-12 md:bottom-20 z-30 max-w-[85vw] md:max-w-[320px] pointer-events-none"
       >
-        <span className="text-sm font-medium text-muted-foreground tracking-widest uppercase mb-4">
-          Welcome
-        </span>
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground leading-[0.95]">
-          Hello<span className="text-muted-foreground">.</span>
-        </h1>
-        <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
-          I'm an <span className="text-foreground font-medium">Information Systems</span> student
-          focusing on{" "}
-          <span className="text-foreground font-medium">Frontend Web Development</span> and{" "}
-          <span className="text-foreground font-medium">Quality Assurance Engineering</span>.
+        <h2 className="text-2xl md:text-4xl font-bold text-foreground leading-tight tracking-tight">
+          Halo 👋,<br />Saya Dicky
+        </h2>
+        <div className="h-1 w-12 bg-orange-500 my-4 md:my-6" />
+        <p className="text-[10px] md:text-xs tracking-[0.3em] text-foreground/80 uppercase font-black">
+          Creative Dev & Designer
         </p>
-        <p className="mt-4 text-base text-muted-foreground leading-relaxed max-w-md">
-          Building clean, performant, and accessible digital experiences.
+        <p className="text-xs md:text-sm text-foreground/70 mt-4 leading-relaxed font-bold">
+          Membangun produk digital Fokus pada inovasi dan pengalaman pengguna.
         </p>
-        <div className="mt-8 flex gap-3">
-          <button className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
-            View Works
-            <ArrowRight className="w-4 h-4" />
-          </button>
-          <button className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-full text-sm font-medium hover:bg-muted transition-colors">
-            About Me
-          </button>
-        </div>
       </motion.div>
 
-      {/* Right: Image placeholder */}
+      {/* Right Info - Notes/Status */}
       <motion.div
-        className="flex-1 flex items-center justify-center max-w-md w-full"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2, duration: 0.4 }}
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.7, duration: 0.8 }}
+        className="absolute right-[10vw] md:right-[13.4vw] bottom-12 md:bottom-20 z-30 max-w-[280px] hidden md:block text-right pointer-events-none"
       >
-        <div className="w-full aspect-square max-w-sm rounded-3xl bg-card border border-border flex items-center justify-center overflow-hidden">
-          <div className="text-center p-8">
-            <div className="w-24 h-24 rounded-full bg-muted mx-auto mb-4 flex items-center justify-center">
-              <span className="text-3xl">👋</span>
-            </div>
-            <p className="text-sm text-muted-foreground">Your photo here</p>
-          </div>
-        </div>
+        <p className="text-[10px] md:text-xs tracking-[0.3em] text-foreground/80 uppercase font-black mb-3">Status:</p>
+        <p className="text-sm text-foreground/90 leading-relaxed italic font-medium font-serif">
+          "Aktif mengeksplorasi teknologi masa depan,<br />
+          menghadirkan solusi desain yang progresif,<br />
+          serta terus berinovasi dalam setiap karya,<br />
+          menciptakan dampak positif yang nyata."
+        </p>
       </motion.div>
     </div>
   );

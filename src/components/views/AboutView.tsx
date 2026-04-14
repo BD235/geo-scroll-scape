@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Code2, Sparkles } from "lucide-react";
+import { GraduationCap, Code2, Lightbulb, ShieldCheck } from "lucide-react";
 
 const techStack = [
-  "React", "Node.js", "Python", "Flask", "Tailwind CSS",
-  "TypeScript", "PostgreSQL", "Git",
+  "Next.js", "React", "Tailwind CSS", "Vite", "Vercel",
+  "Git", "GitHub", "TypeScript",
+];
+
+const otherSkills = [
+  "QA Engineer", "Data Analyst", "SQL", "Tableau", "Power BI",
 ];
 
 const container = {
@@ -22,9 +26,9 @@ const item = {
 
 const AboutView = () => {
   return (
-    <div className="h-full overflow-y-auto md:overflow-hidden px-6 md:px-16 lg:px-24 py-8 md:py-0 md:flex md:items-center">
+    <div className="h-full overflow-y-auto px-6 md:px-16 lg:px-24 py-10 md:py-0 md:flex md:items-center">
       <motion.div
-        className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-min md:auto-rows-fr"
+        className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5"
         variants={container}
         initial="hidden"
         animate="show"
@@ -32,63 +36,89 @@ const AboutView = () => {
         {/* Education — spans 2 cols */}
         <motion.div
           variants={item}
-          className="md:col-span-2 bg-card border border-border rounded-2xl p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition-shadow"
+          className="md:col-span-2 bg-card border border-border rounded-2xl p-7 md:p-8 flex flex-col justify-between hover:shadow-md transition-shadow"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
-              <GraduationCap className="w-5 h-5 text-foreground" />
+          <div className="flex items-center gap-4 mb-5">
+            <div className="w-11 h-11 rounded-2xl bg-muted flex items-center justify-center">
+              <GraduationCap className="w-6 h-6 text-foreground" />
             </div>
-            <span className="text-xs font-medium text-muted-foreground tracking-widest uppercase">
+            <span className="text-xs font-bold text-muted-foreground tracking-[0.2em] uppercase">
               Education
             </span>
           </div>
           <div>
-            <h3 className="text-xl font-semibold text-foreground">
+            <h3 className="text-xl md:text-2xl font-bold text-foreground">
               Universitas Atma Jaya Yogyakarta
             </h3>
-            <p className="text-muted-foreground mt-1 text-sm">
-              Information Systems · Undergraduate
+            <p className="text-muted-foreground mt-2 text-base font-semibold">
+              Sistem Informasi · Sarjana (S1)
             </p>
           </div>
         </motion.div>
 
-        {/* Philosophy */}
+        {/* Expertise — spans 1 col */}
         <motion.div
           variants={item}
-          className="bg-card border border-border rounded-2xl p-6 md:p-8 flex flex-col justify-between hover:shadow-md transition-shadow"
+          className="bg-card border border-border rounded-2xl p-7 md:p-8 flex flex-col justify-start hover:shadow-md transition-shadow"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-foreground" />
+          <div className="flex items-center gap-4 mb-5">
+            <div className="w-11 h-11 rounded-2xl bg-muted flex items-center justify-center">
+              <ShieldCheck className="w-6 h-6 text-foreground" />
             </div>
-            <span className="text-xs font-medium text-muted-foreground tracking-widest uppercase">
-              Philosophy
-            </span>
-          </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            I believe in building interfaces that feel <span className="text-foreground font-medium">invisible</span> — clean, fast, and purposeful. Good UI should get out of the way.
-          </p>
-        </motion.div>
-
-        {/* Tech Stack — spans full width */}
-        <motion.div
-          variants={item}
-          className="md:col-span-3 bg-card border border-border rounded-2xl p-6 md:p-8 hover:shadow-md transition-shadow"
-        >
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
-              <Code2 className="w-5 h-5 text-foreground" />
-            </div>
-            <span className="text-xs font-medium text-muted-foreground tracking-widest uppercase">
-              Tech Stack
+            <span className="text-xs font-bold text-muted-foreground tracking-[0.2em] uppercase">
+              Expertise
             </span>
           </div>
           <div className="flex flex-wrap gap-2">
+            {otherSkills.map((skill) => (
+              <Badge
+                key={skill}
+                variant="outline"
+                className="px-3 py-1 text-[10px] font-bold rounded-lg border-foreground/10"
+              >
+                {skill}
+              </Badge>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Filosofi — spans 1 col */}
+        <motion.div
+          variants={item}
+          className="bg-card border border-border rounded-2xl p-7 md:p-8 flex flex-col justify-between hover:shadow-md transition-shadow"
+        >
+          <div className="flex items-center gap-4 mb-5">
+            <div className="w-11 h-11 rounded-2xl bg-muted flex items-center justify-center">
+              <Lightbulb className="w-6 h-6 text-foreground" />
+            </div>
+            <span className="text-xs font-bold text-muted-foreground tracking-[0.2em] uppercase">
+              Filosofi
+            </span>
+          </div>
+          <p className="text-sm text-muted-foreground/90 leading-relaxed italic font-medium">
+            "Desain yang baik adalah desain yang memudahkan pengguna mencapai tujuannya."
+          </p>
+        </motion.div>
+
+        {/* Tech Stack — spans 2 cols on desktop */}
+        <motion.div
+          variants={item}
+          className="md:col-span-2 bg-card border border-border rounded-2xl p-7 md:p-8 hover:shadow-md transition-shadow"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-11 h-11 rounded-2xl bg-muted flex items-center justify-center">
+              <Code2 className="w-6 h-6 text-foreground" />
+            </div>
+            <span className="text-xs font-bold text-muted-foreground tracking-[0.2em] uppercase">
+              Tech Stack
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-2.5">
             {techStack.map((tech) => (
               <Badge
                 key={tech}
                 variant="secondary"
-                className="px-4 py-1.5 text-sm font-medium rounded-full"
+                className="px-4 py-1.5 text-xs font-bold rounded-xl bg-muted/60 text-foreground border border-border/50"
               >
                 {tech}
               </Badge>

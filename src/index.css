@@ -6,10 +6,10 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
+    --background: 48 25% 92%;
     --foreground: 220 13% 10%;
 
-    --card: 220 14% 96%;
+    --card: 48 20% 95%;
     --card-foreground: 220 13% 10%;
 
     --popover: 0 0% 100%;
@@ -18,10 +18,10 @@
     --primary: 220 13% 10%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 14% 96%;
+    --secondary: 48 15% 88%;
     --secondary-foreground: 220 13% 10%;
 
-    --muted: 220 14% 96%;
+    --muted: 48 15% 88%;
     --muted-foreground: 220 9% 46%;
 
     --accent: 220 14% 96%;
@@ -36,7 +36,7 @@
 
     --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 48 25% 92%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
@@ -86,4 +86,20 @@
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
   }
+
+  /* 3D Transform Utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
 }
+
+
