@@ -7,7 +7,7 @@ const projects = [
     title: "Mobile Electricity App",
     description: "Aplikasi mobile untuk pembacaan meteran listrik otomatis menggunakan OCR.",
     stack: ["TypeScript", "Next.js", "Tailwind", "OCR"],
-    link: "https://github.com/bernardinusdicky",
+    link: "https://github.com/bd2661/powertrack",
   },
   {
     title: "Portfolio Scape",

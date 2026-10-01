@@ -3,12 +3,11 @@ import { Badge } from "@/components/ui/badge";
 import { GraduationCap, Code2, Lightbulb, ShieldCheck } from "lucide-react";
 
 const techStack = [
-  "Next.js", "React", "Tailwind CSS", "Vite", "Vercel",
-  "Git", "GitHub", "TypeScript",
+  "Next.js", "React", "Tailwind CSS", "TypeScript", "Javascript"
 ];
 
 const otherSkills = [
-  "QA Engineer", "Data Analyst", "SQL", "Tableau", "Power BI",
+  "QA Engineer", "Data Analyst", "SQL"
 ];
 
 const container = {

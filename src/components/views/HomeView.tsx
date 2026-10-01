@@ -171,44 +171,6 @@ const HomeView = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* ================================================
-          INFO BLOCKS
-          ================================================ */}
-      {/* Left Info - Greeting & Bio */}
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-        className="absolute left-[10vw] lg:left-[13.4vw] bottom-12 lg:bottom-20 z-30 max-w-[85vw] lg:max-w-[320px] pointer-events-none max-lg:static max-lg:mt-6 max-lg:text-center max-lg:self-center max-lg:px-6 max-lg:max-w-[90vw]"
-      >
-        <h2 className="text-2xl lg:text-4xl font-bold text-foreground leading-tight tracking-tight max-lg:text-xl">
-          Halo 👋,<br />Saya Dicky
-        </h2>
-        <div className="h-1 w-12 bg-orange-500 my-4 lg:my-6 max-lg:mx-auto max-lg:my-3" />
-        <p className="text-[10px] lg:text-xs tracking-[0.3em] text-foreground/80 uppercase font-black">
-          Creative Dev & Designer
-        </p>
-        <p className="text-xs lg:text-sm text-foreground/70 mt-4 leading-relaxed font-bold">
-          Membangun produk digital Fokus pada inovasi dan pengalaman pengguna.
-        </p>
-      </motion.div>
-
-      {/* Right Info - Notes/Status (Desktop only) */}
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.7, duration: 0.8 }}
-        className="absolute right-[10vw] lg:right-[13.4vw] bottom-12 lg:bottom-20 z-30 max-w-[280px] hidden lg:block text-right pointer-events-none"
-      >
-        <p className="text-[10px] lg:text-xs tracking-[0.3em] text-foreground/80 uppercase font-black mb-3">Status:</p>
-        <p className="text-sm text-foreground/90 leading-relaxed italic font-medium font-serif">
-          "Aktif mengeksplorasi teknologi masa depan,<br />
-          menghadirkan solusi desain yang progresif,<br />
-          serta terus berinovasi dalam setiap karya,<br />
-          menciptakan dampak positif yang nyata."
-        </p>
-      </motion.div>
     </div>
   );
 };
